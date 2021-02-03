@@ -1,0 +1,7 @@
+package quanlithuvien.entity;
+
+
+
+public class BaseEntity {
+
+}

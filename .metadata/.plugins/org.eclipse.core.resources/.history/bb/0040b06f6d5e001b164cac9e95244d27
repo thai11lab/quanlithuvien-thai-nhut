@@ -1,0 +1,42 @@
+package quanlithuvien.entity;
+
+import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_category")
+public class Category {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "code" ,nullable = false,length = 30)
+	private String code;
+	
+	@Column(name = "name",nullable = false,length = 255)
+	private String name;
+	
+	@Column(name = "createddate")
+	private Date createdDate;
+	
+	@Column(name = "modifieddate")
+	private Date modifiedDate;
+	
+	@Column(name = "createdby")
+	private String createdBy;
+	
+	@Column(name = "modifiedby")
+	private String modifiedBy;
+	
+	@OneToMany(mappedBy = )
+	private List<Book> books;
+}

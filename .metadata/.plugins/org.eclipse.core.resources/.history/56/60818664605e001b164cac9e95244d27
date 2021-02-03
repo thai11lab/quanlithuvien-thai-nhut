@@ -1,0 +1,47 @@
+package quanlithuvien.entity;
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+@Entity
+@Table(name = "tb_book")
+public class Book {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "book_id")
+	private Long id;
+	
+	@Column(name = "code" ,nullable = false,length = 30)
+	private String code;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "company")
+	private String company;
+	
+	@Column(name = "totalBook")
+	private int totalBook;
+	
+	@Column(name = "createddate")
+	private Date createdDate;
+	
+	@Column(name = "modifieddate")
+	private Date modifiedDate;
+	
+	@Column(name = "createdby")
+	private String createdBy;
+	
+	@Column(name = "modifiedby")
+	private String modifiedBy;
+	
+}

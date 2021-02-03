@@ -1,0 +1,11 @@
+package quanlithuvien.datasoucre;
+
+import org.hibernate.Session;
+import org.hibernate.cfg.Configuration;
+
+public class HibernateConfig {
+	public static Session buildSessionFactory() {
+		Configuration configuration = new Configuration();
+		configuration.configure("");
+	}
+}
