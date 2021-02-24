@@ -1,3 +1,4 @@
+<%@page import="quanlithuvien.entity.Category"%>
 <%@page import="quanlithuvien.entity.Book"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,20 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="/decorator/admin/header.jsp" %>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-	<div class="wrapper">
-		<%@include file="/decorator/admin/navbar.jsp" %>
-	    <!-- Main Sidebar Container -->
-	    <%@include file="/decorator/admin/slidebar.jsp" %>
+
 	    <div class="content-wrapper">
 	      <!-- Content Header (Page header) -->
 	      <div class="content-header">
 	        <div class="container-fluid">
 	          <div class="row mb-2">
 	            <div class="col-sm-6">
-	              <h1 class="m-0 text-dark">Danh sách tài liệu</h1>
+	              <h1 class="m-0 text-dark">Thể loại</h1>
 	              
 	              <!-- SEARCH FORM -->
 			     
@@ -37,14 +33,14 @@
 	      <div class="card">
               <div class="card-header" >
                 <h3 class="card-title">
-                	<a href="/books?action=ADD" class="btn btn-block btn-success " style="width: 200px">
+                	<a href="/category?action=ADD" class="btn btn-block btn-success " style="width: 200px">
 	              	<i class="fas fa-plus-square"></i>	
-	              	Thêm mới tài liệu
+	              	Thêm mới thể loại
 	              	
 	              </a>
                 </h3>
                 
-                 <form class="form-inline ml-3" style="float: right;" id="form-search" action="/books?action=SEARCH" method="post">
+                 <form class="form-inline ml-3" style="float: right;" id="form-search" action="/category?action=SEARCH" method="post">
 			        <div class="input-group input-group-sm">
 			        <input class="form-control form-control-navbar" type="hidden" placeholder="Search" aria-label="Search" name="action" value="LIST">
 			          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="key">
@@ -61,30 +57,26 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Mã tài liệu</th>
-                    <th>Tên tài liệu</th>
-                    <th>Nhà xuất bản</th>
-                    <th>Hình ảnh</th>
-                    <th>Số lượng</th>                  
+                    <th>Mã thể loại</th>
+                    <th>Tên thể loại</th>
+                                    
                     <th>Hành động</th>
                   </tr>
                   </thead>
                   
                   <tbody>
                   <% 
-                  	List<Book> books = (List<Book>) request.getAttribute("listBook");
-                  	for(Book item : books){                 	
+                  	List<Category> categories = (List<Category>) request.getAttribute("listCategories");
+                  	for(Category item : categories){                 	
                   %>
                   <tr>
                     <td><%=item.getCode() %></td>
                     <td>
                     	<%=item.getName() %>
                     </td>
-                    <td><%=item.getCompany() %></td>
-                    <td><img > </td>
-                    <td><%=item.getTotalBook() %></td>
+                    
                     <td style="display: flex;">
-                    	<a class="s" style="width: 20px;height: 20px" href="/books?action=EDIT&id=<%=item.getId()%>">
+                    	<a class="s" style="width: 20px;height: 20px" href="/category?action=EDIT&id=<%=item.getId()%>">
                   			
                   			<i class="fas fa-pen"></i>
                     </a>|           
@@ -126,9 +118,9 @@
       		  closeOnCancel: false
       		}).then(function(isConfirm){
       			if (isConfirm.value) {
-      				window.location.href="/books?action=DELETE&id="+id;
+      				window.location.href="/category?action=DELETE&id="+id;
                     swal("Good job!", "Xóa thành công!", "success");                    		
-                    
+                  
 				}                
           });
     	}); 	

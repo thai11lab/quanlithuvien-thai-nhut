@@ -29,7 +29,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/books">
+              <form method="post" action="/books?action=UPDATE_SUCCESS">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="code">Mã sách</label>

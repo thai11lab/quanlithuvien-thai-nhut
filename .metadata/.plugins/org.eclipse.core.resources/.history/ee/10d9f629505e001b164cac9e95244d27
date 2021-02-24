@@ -1,8 +1,0 @@
-package quanlithuvien.entity;
-
-import javax.persistence.MappedSuperclass;
-
-@MappedSuperclass
-public class BaseEntity {
-
-}

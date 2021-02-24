@@ -51,11 +51,18 @@
 	              </a>
 	            </li>
 	            <li class="nav-item">
-	              <a href="/books?action=LIST&key=" class="nav-link">
+	              <a href="/books?action=LIST" class="nav-link">
 	                <i class="nav-icon fas fa-th"></i>
 	                <p>
 	                  Quản lí sách
-	                  <span class="right badge badge-danger">New</span>
+	                </p>
+	              </a>
+	            </li>
+	            <li class="nav-item">
+	              <a href="/category?action=LIST" class="nav-link">
+	                <i class="nav-icon fas fa-th"></i>
+	                <p>
+	                  Quản lí thể loại
 	                </p>
 	              </a>
 	            </li>

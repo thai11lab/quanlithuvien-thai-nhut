@@ -1,5 +1,0 @@
-package quanlithuvien.datasoucre;
-
-public class HibernateConfig {
-
-}

@@ -3,6 +3,8 @@ package quanlithuvien.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 
 import quanlithuvien.datasoucre.HibernateConfig;
@@ -65,5 +67,97 @@ public class CategoryRepository {
 			}
 		}
 		return category;
+	}
+
+	public void save(Category category) {
+		// TODO Auto-generated method stub
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();	
+			session.beginTransaction();
+			session.save(category);
+			
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		}finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	public void update(Category category,Long idUpdate) {
+		// TODO Auto-generated method stub
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();	
+			Category categoryEdit = session.find(Category.class,idUpdate);
+			session.beginTransaction();
+			categoryEdit.setCode(category.getCode());
+			categoryEdit.setName(category.getName());			
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+			
+		}finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	public List<Category> findBySearch(String key) {
+		List<Category> liCategories= new ArrayList<Category>();
+		String sql = "SELECT b FROM Category b";
+		if (key != null && key !="") {
+			sql+=" WHERE b.name LIKE :key1 OR b.code LIKE :key2 ";
+		}
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			
+			Query query = session.createQuery(sql,Category.class);
+			if (key != null && key !="") {
+				query.setParameter("key1", "%"+key+"%");
+				query.setParameter("key2", "%"+key+"%");
+			}
+			
+			liCategories = query.getResultList();
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		}finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return liCategories;
+	}
+
+	public void deleteById(Long id1) {
+		// TODO Auto-generated method stub
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery("delete Category where id = :ID");
+			query.setParameter("ID", id1);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 }

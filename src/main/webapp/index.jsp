@@ -5,8 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-	<a href="/home-admin">Link</a>
+	
+	
+
+   		
+		
+		<div class="content-wrapper">
+			<a href="/home-admin">Tới trang chủ</a>
+		</div>
+	   
+  
 </body>
 </html>

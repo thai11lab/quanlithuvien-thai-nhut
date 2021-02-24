@@ -28,4 +28,24 @@ public class CategoryService {
 //	public void save(Category category) {
 //		categoryRepository.save(category);
 //	}
+
+	public void deleteById(Long id1) {
+		categoryRepository.deleteById(id1);
+		
+	}
+
+	public List<Category> findBySearch(String key) {
+		// TODO Auto-generated method stub
+		return categoryRepository.findBySearch(key);
+	}
+
+	public void update(Category category, Long idUpdate) {
+		// TODO Auto-generated method stub
+		categoryRepository.update(category,idUpdate);
+	}
+
+	public void save(Category category) {
+		// TODO Auto-generated method stub
+		categoryRepository.save(category);
+	}
 }

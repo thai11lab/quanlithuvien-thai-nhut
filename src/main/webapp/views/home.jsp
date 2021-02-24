@@ -3,16 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>	
-	<%@include file="/decorator/admin/header.jsp" %>
 </head>
 	<body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-
-   		
-		<%@include file="/decorator/admin/navbar.jsp" %>
-	    <!-- Main Sidebar Container -->
-	    <%@include file="/decorator/admin/slidebar.jsp" %>
-
 	    <!-- Content Wrapper. Contains page content -->
 	    <div class="content-wrapper">
 	      <!-- Content Header (Page header) -->
@@ -109,7 +102,6 @@
 	      </section>
       <!-- /.content -->
     </div>
-    <%@include file="/decorator/admin/footer.jsp" %>
 	</body>
 </html>
 

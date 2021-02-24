@@ -1,7 +1,0 @@
-package quanlithuvien.entity;
-
-@Entity
-@Table(name = "tb_roles")
-public class Role {
-	
-}
