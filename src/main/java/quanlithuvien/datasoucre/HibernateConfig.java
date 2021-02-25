@@ -6,9 +6,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import quanlithuvien.entity.Book;
+import quanlithuvien.entity.BookReader;
 import quanlithuvien.entity.Category;
-import quanlithuvien.entity.Role;
-import quanlithuvien.entity.User;
+import quanlithuvien.entity.Reader;
 
 public class HibernateConfig {
 	public static SessionFactory buildSessionFactory() {
@@ -16,8 +16,8 @@ public class HibernateConfig {
 		configuration.configure("hibernate-config.xml");
 		configuration.addAnnotatedClass(Book.class);
 		configuration.addAnnotatedClass(Category.class);
-		configuration.addAnnotatedClass(Role.class);
-		configuration.addAnnotatedClass(User.class);
+		configuration.addAnnotatedClass(Reader.class);
+		configuration.addAnnotatedClass(BookReader.class);
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
 		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);

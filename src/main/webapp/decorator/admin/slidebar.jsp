@@ -66,6 +66,14 @@
 	                </p>
 	              </a>
 	            </li>
+	            <li class="nav-item">
+	              <a href="/reader?action=LIST" class="nav-link">
+	                <i class="nav-icon fas fa-th"></i>
+	                <p>
+	                  Quản lí bạn đọc
+	                </p>
+	              </a>
+	            </li>
 	          </ul>
 	        </nav>
 	        <!-- /.sidebar-menu -->

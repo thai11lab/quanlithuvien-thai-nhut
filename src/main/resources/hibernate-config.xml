@@ -20,7 +20,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="quanlithuvien.entity.Book"/>
         <mapping class="quanlithuvien.entity.Category"/>
-        <mapping class="quanlithuvien.entity.Role"/>
-        <mapping class="quanlithuvien.entity.User"/>
+        <mapping class="quanlithuvien.entity.Reader"/>
+        <mapping class="quanlithuvien.entity.BookReader"/>
 	</session-factory>
 </hibernate-configuration>

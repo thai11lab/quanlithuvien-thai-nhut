@@ -9,16 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 @Entity
-@Table(name = "book")
-public class Book {
+@Table(name = "reader")
+public class Reader {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,21 +25,14 @@ public class Book {
 	@Column(name = "code" ,nullable = false,length = 30)
 	private String code;
 	
-	@Column(name = "name",nullable = false,length = 255)
+	@Column(name = "full_name",nullable = false,length = 255)
 	private String name;
 	
-	@Column(name = "company")
-	private String company;
+	@Column(name = "address")
+	private String address;
 	
-	@Column(name = "total_book")
-	private int totalBook;
-	
-	@Column(name = "img_url")
-	private String img_url;
-	
-	@Column(name = "isShow")
-	private int isShow;
-	
+	@Column(name = "age")
+	private int age;
 	
 	@Column(name = "created_date")
 	private Date createdDate;
@@ -55,40 +45,27 @@ public class Book {
 	
 	@Column(name = "modified_by")
 	private String modifiedBy;
+
+	@OneToMany(mappedBy = "reader",fetch = FetchType.LAZY)
+	private Set<BookReader> bookReaders;
 	
-	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private Category category;
-	
-	@OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
-	private Set<BookReader> bookReader;
-	
-	
-	
-	public Book() {
+	public Reader() {
 		super();
 	}
-
 	
-	public Book(Long id, String code, String name, String company, int totalBook, String img_url, int isShow,
-			Date createdDate, Date modifiedDate, String createdBy, String modifiedBy, Category category,
-			Set<BookReader> bookReader) {
+	public Reader(Long id, String code, String name, String address, int age, Date createdDate, Date modifiedDate,
+			String createdBy, String modifiedBy) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.name = name;
-		this.company = company;
-		this.totalBook = totalBook;
-		this.img_url = img_url;
-		this.isShow = isShow;
+		this.address = address;
+		this.age = age;
 		this.createdDate = createdDate;
 		this.modifiedDate = modifiedDate;
 		this.createdBy = createdBy;
 		this.modifiedBy = modifiedBy;
-		this.category = category;
-		this.bookReader = bookReader;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -114,36 +91,20 @@ public class Book {
 		this.name = name;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public int getTotalBook() {
-		return totalBook;
+	public int getAge() {
+		return age;
 	}
 
-	public void setTotalBook(int totalBook) {
-		this.totalBook = totalBook;
-	}
-
-	public String getImg_url() {
-		return img_url;
-	}
-
-	public void setImg_url(String img_url) {
-		this.img_url = img_url;
-	}
-
-	public int getIsShow() {
-		return isShow;
-	}
-
-	public void setIsShow(int isShow) {
-		this.isShow = isShow;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public Date getCreatedDate() {
@@ -177,23 +138,6 @@ public class Book {
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public Set<BookReader> getBookReader() {
-		return bookReader;
-	}
-
-	public void setBookReader(Set<BookReader> bookReader) {
-		this.bookReader = bookReader;
-	}
-	
 	
 	
 }
