@@ -3,6 +3,7 @@ package quanlithuvien.entity;
 import java.sql.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,6 +32,8 @@ public class Reader {
 	@Column(name = "address")
 	private String address;
 	
+	
+
 	@Column(name = "age")
 	private int age;
 	
@@ -46,15 +49,17 @@ public class Reader {
 	@Column(name = "modified_by")
 	private String modifiedBy;
 
-	@OneToMany(mappedBy = "reader",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "reader",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private Set<BookReader> bookReaders;
 	
 	public Reader() {
 		super();
 	}
 	
+	
+
 	public Reader(Long id, String code, String name, String address, int age, Date createdDate, Date modifiedDate,
-			String createdBy, String modifiedBy) {
+			String createdBy, String modifiedBy, Set<BookReader> bookReaders) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -65,7 +70,10 @@ public class Reader {
 		this.modifiedDate = modifiedDate;
 		this.createdBy = createdBy;
 		this.modifiedBy = modifiedBy;
+		this.bookReaders = bookReaders;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -139,5 +147,11 @@ public class Reader {
 		this.modifiedBy = modifiedBy;
 	}
 	
-	
+	public Set<BookReader> getBookReaders() {
+		return bookReaders;
+	}
+
+	public void setBookReaders(Set<BookReader> bookReaders) {
+		this.bookReaders = bookReaders;
+	}
 }

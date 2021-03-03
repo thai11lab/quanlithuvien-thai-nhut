@@ -146,12 +146,14 @@ public class CategoryRepository {
 		try {
 			session = HibernateConfig.buildSessionFactory().openSession();
 			session.beginTransaction();
-			Query query = session.createQuery("delete Category where id = :ID");
+			Query query = session.createQuery("Select c FROM Category c where c.id = :ID",Category.class);
 			query.setParameter("ID", id1);
-			query.executeUpdate();
+			Category category = (Category) query.getSingleResult();
+			session.delete(category);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.getStackTrace();
 			System.out.println("Rollback");
 			session.getTransaction().rollback();
 		} finally {

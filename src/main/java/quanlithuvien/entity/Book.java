@@ -3,6 +3,7 @@ package quanlithuvien.entity;
 import java.sql.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -60,7 +61,7 @@ public class Book {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-	@OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "book",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private Set<BookReader> bookReader;
 	
 	

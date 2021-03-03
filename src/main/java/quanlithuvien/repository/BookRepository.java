@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 import quanlithuvien.datasoucre.HibernateConfig;
 import quanlithuvien.entity.Book;
+import quanlithuvien.entity.BookReader;
 
 public class BookRepository {
 	
@@ -105,15 +106,23 @@ public class BookRepository {
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
 //		Book book = new Book();
+//		String sql = "Select br from BookReader as br inner join Book b on br.book.id=b.id WHERE 1 = 1 AND br.book.id= :book_id";
+		String sql = "Select b from Book b WHERE b.id = :book_id";
 		try {
 			session = HibernateConfig.buildSessionFactory().openSession();
 			session.beginTransaction();
-			Query query = session.createQuery("delete Book where id = :ID");
-			query.setParameter("ID", id);
-			query.executeUpdate();
+			Query query = session.createQuery(sql,Book.class);
+			query.setParameter("book_id", id);
+			Book book = (Book) query.getSingleResult();
+			session.delete(book);
+			
+//			session.delete();	
+//			query1.setParameter("ID", id);
+//			query1.executeUpdate();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("Rollback");
 			session.getTransaction().rollback();
 		} finally {

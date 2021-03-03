@@ -1,7 +1,6 @@
 package quanlithuvien.entity;
 
-import java.sql.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "book_reader")
@@ -22,6 +19,9 @@ public class BookReader {
 	@Column(name = "id")
 	private Long id;
 	
+	@Column(name = "checked")
+	private String checked;
+	
 	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
@@ -31,12 +31,23 @@ public class BookReader {
 	@JoinColumn(name = "reader_id")
 	private Reader reader;
 
-
-	public BookReader(Long id, Book book, Reader reader) {
+	
+	public BookReader(Long id,String checked, Book book, Reader reader) {
 		super();
 		this.id = id;
 		this.book = book;
 		this.reader = reader;
+		this.checked=checked;
+	}
+
+
+	public String getChecked() {
+		return checked;
+	}
+
+
+	public void setChecked(String checked) {
+		this.checked = checked;
 	}
 
 

@@ -3,6 +3,7 @@ package quanlithuvien.entity;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,7 +40,7 @@ public class Category {
 	@Column(name = "modified_by")
 	private String modifiedBy;
 	
-	@OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "category",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Book> books;
 
 	public Category(Long id, String code, String name, Date createdDate, Date modifiedDate, String createdBy,

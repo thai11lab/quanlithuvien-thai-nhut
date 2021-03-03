@@ -11,7 +11,7 @@
 		<mysql.version>8.0.22</mysql.version>
 		<hibernate.version>5.4.21.Final</hibernate.version>
 		<serverlet.api.version>4.0.1</serverlet.api.version>
-		
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,6 +34,13 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 	</dependencies>
 	<!--config build -->
 	<build>
@@ -45,9 +52,11 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<path>/</path>
+					<port>8081</port>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

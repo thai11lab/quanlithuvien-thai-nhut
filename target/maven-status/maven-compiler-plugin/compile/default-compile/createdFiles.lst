@@ -1,0 +1,17 @@
+quanlithuvien\entity\Book.class
+quanlithuvien\entity\BookReader.class
+quanlithuvien\controller\HomeController.class
+quanlithuvien\controller\ErrorController.class
+quanlithuvien\repository\CategoryRepository.class
+quanlithuvien\controller\CategoryController.class
+quanlithuvien\service\ReaderService.class
+quanlithuvien\controller\main.class
+quanlithuvien\controller\BookController.class
+quanlithuvien\datasoucre\HibernateConfig.class
+quanlithuvien\entity\Reader.class
+quanlithuvien\entity\Category.class
+quanlithuvien\service\BookService.class
+quanlithuvien\controller\ReaderController.class
+quanlithuvien\repository\ReaderRepository.class
+quanlithuvien\repository\BookRepository.class
+quanlithuvien\service\CategoryService.class

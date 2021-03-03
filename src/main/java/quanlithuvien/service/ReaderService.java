@@ -21,11 +21,22 @@ public class ReaderService {
 
 	public Reader findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return readerRepository.findById(id);
 	}
 
 	public void deleteById(Long id1) {
 		// TODO Auto-generated method stub
+		
+	}
+	public List<Reader> findBySearch(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void save(Reader reader, List<Long> productIdL) {
+		readerRepository.save(reader,productIdL);
+	}
+	public void update(Reader reader, Long idUpdate, List<Long> productIdL) {
+		readerRepository.update(reader,idUpdate,productIdL);
 		
 	}
 
