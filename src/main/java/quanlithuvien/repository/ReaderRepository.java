@@ -47,11 +47,13 @@ public class ReaderRepository {
 			if (productIdL != null && productIdL.size() > 0) {
 				for (Long itemIdPr : productIdL) {
 					Book book = session.find(Book.class, itemIdPr);
+					book.setTotalBook(book.getTotalBook()-1);
 					BookReader bookReader = new BookReader();
 					bookReader.setBook(book);
 					bookReader.setReader(reader);
 					session.save(bookReader);
 				}
+				
 			}
 			session.getTransaction().commit();
 
