@@ -43,4 +43,9 @@ public class BookService {
 		// TODO Auto-generated method stub
 		return bookRepository.findBySearch(key);
 	}
+
+	public List<Book> findByProductIsCheck(Long id) {
+		// TODO Auto-generated method stub
+		return bookRepository.findByProductIsCheck(id);
+	}
 }

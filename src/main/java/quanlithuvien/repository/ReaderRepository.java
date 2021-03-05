@@ -1,6 +1,7 @@
 package quanlithuvien.repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -15,7 +16,12 @@ import quanlithuvien.entity.Reader;
 public class ReaderRepository {
 
 	private static Session session;
-
+	
+	
+	private BookReaderRepository bookReaderRepository;
+	public ReaderRepository() {
+		bookReaderRepository = new BookReaderRepository();
+	}
 	public List<Reader> findAll() {
 		List<Reader> listRD = new ArrayList<Reader>();
 		try {
@@ -71,23 +77,36 @@ public class ReaderRepository {
 		try {
 			session = HibernateConfig.buildSessionFactory().openSession();
 			session.beginTransaction();
+			Reader readerUpdate = session.find(Reader.class, idUpdate);
+			readerUpdate.setAddress(reader.getAddress());
+			readerUpdate.setAge(reader.getAge());
+			readerUpdate.setCode(reader.getCode());
+//			readerUpdate.setCreatedDate((java.sql.Date) new Date());
+			readerUpdate.setName(reader.getName());
+			List<BookReader> bookReaderOld = bookReaderRepository.findByReaderId(idUpdate);
 			
-			session.save(reader);
 			if (productIdL != null && productIdL.size() > 0) {
+				for (BookReader bookReader : bookReaderOld) {
+					session.delete(bookReader);
+				}
+				
 				for (Long itemIdPr : productIdL) {
 					book = session.find(Book.class, itemIdPr);
+					book.setTotalBook(book.getTotalBook()-1);
 					BookReader bookReader = new BookReader();
+					
 					bookReader.setBook(book);
-					bookReader.setReader(reader);
+					bookReader.setReader(readerUpdate);
 					session.save(bookReader);
 				}
-				book.setTotalBook(book.getTotalBook()-1);
+				
 			}
 		
 			session.getTransaction().commit();
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			session.getTransaction().rollback();
 		} finally {
 			session.close();
@@ -111,5 +130,25 @@ public class ReaderRepository {
 		}
 		return reader;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> findByReaderDetail(Long idReader) {
+		// TODO Auto-generated method stub
+		List<Object[]> listObjects = new ArrayList<Object[]>();
+		String sql = "SELECT r,b FROM Reader r inner join BookReader br on r.id = br.reader.id inner join Book b on b.id = br.book.id WHERE r.id= :reader_id";
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery(sql);
+			query.setParameter("reader_id",idReader);
+			listObjects = query.getResultList();			
+			session.getTransaction().commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+			session.getTransaction().rollback();
+		}
+		return listObjects;
+	}
+	
+	
 }

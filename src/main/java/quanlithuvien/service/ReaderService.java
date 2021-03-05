@@ -39,5 +39,10 @@ public class ReaderService {
 		readerRepository.update(reader,idUpdate,productIdL);
 		
 	}
+	public List<Object[]> findByReaderDetail(Long idReader) {
+		// TODO Auto-generated method stub
+		List<Object[]> listObject = readerRepository.findByReaderDetail(idReader);
+		return listObject;
+	}
 
 }

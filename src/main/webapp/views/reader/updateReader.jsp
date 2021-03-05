@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/reader?action=ADD_SUCCESS">
+              <form method="post" action="/reader?action=UPDATE_SUSCEES">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="code">Mã</label>
@@ -58,15 +58,17 @@
                     <br></br>
                     <div style="padding-right: 30px">
 	                    
-	                    <%List<Book> books =(List<Book>) request.getAttribute("listBook");
+	                    <%
+	                    	List<Book> books =(List<Book>) request.getAttribute("listBook");
+	                    	List<Book> listBookChecked = (List<Book>) request.getAttribute("listBookChecked");
                     		for(Book book: books){                   		
                     	%>
-							<%=book.getName() %><input type="checkbox" class="form-check-input" id="name"  name="product_id" value="<%=book.getId() %>" >
+							<%=book.getName() %><input type="checkbox" class="form-check-input" id="name"  name="product_id" value="<%=book.getId() %>" <%=books.containsAll(listBookChecked)?"checked":"" %> >
 						<%} %>
                     </div>
                     <span id="validate-name"></span>
                   </div>          
-                  <input type="hidden" class="form-check-input" name="id" value="">
+                  <input type="hidden" class="form-check-input" name="id" value="<%=reader.getId()%>">
                 </div>
                 <!-- /.card-body -->
 				

@@ -14,6 +14,7 @@ import quanlithuvien.entity.Book;
 import quanlithuvien.entity.BookReader;
 import quanlithuvien.entity.Category;
 import quanlithuvien.entity.Reader;
+import quanlithuvien.service.BookReaderService;
 import quanlithuvien.service.BookService;
 import quanlithuvien.service.ReaderService;
 
@@ -23,11 +24,13 @@ public class ReaderController extends HttpServlet {
        
     private ReaderService readerService;
     private BookService bookService;
+    private BookReaderService bookReaderService;
     public ReaderController() {
         super();
         // TODO Auto-generated constructor stub
         readerService = new ReaderService();
         bookService = new BookService();
+        bookReaderService = new BookReaderService();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,7 +57,15 @@ public class ReaderController extends HttpServlet {
 			Long id = Long.parseLong(request.getParameter("id").toString());
 			reader = readerService.findById(id);
 //			List<BookReader>
-			 
+			List<Book> bookIsChecked = bookService.findByProductIsCheck(id);
+//			for (Book book : books) {
+//				if (books.containsAll(bookIsChecked)==true) {
+//					System.out.println("OK");
+//				}else {
+//					System.out.println("false");
+//				}
+//			}
+			request.setAttribute("listBookChecked",bookIsChecked);
 			request.setAttribute("reader", reader);
 			request.getRequestDispatcher(request.getContextPath() + "/views/reader/updateReader.jsp").forward(request,
 					response);
@@ -64,10 +75,18 @@ public class ReaderController extends HttpServlet {
 			readerService.deleteById(id1);
 			response.sendRedirect("/books?action=LIST");
 			break;
-//		case "SEARCH":
-//			request.setAttribute("listBook", listBook);
-//			request.getRequestDispatcher(request.getContextPath() + "/views/books/books.jsp").forward(request,response);
-//			break;
+		case "detail_reader":
+			Long idReader = Long.parseLong(request.getParameter("id").toString());
+			List<Object[]> listObject = readerService.findByReaderDetail(idReader);
+			for (Object[] objects : listObject) {
+				Reader readerObj = (Reader) objects[0];
+				BookReader bookReaderObj = (BookReader) objects[1];
+				Book bookObj = (Book) objects[2];
+				System.out.println(readerObj.getName()+"-"+bookReaderObj.getId()+"-"+bookObj.getName());
+			}
+			request.setAttribute("Object",listObject);
+			request.getRequestDispatcher("/views/reader/detal_reader.jsp").forward(request,response);
+			break;
 		default:
 			break;
 		}

@@ -49,6 +49,11 @@
 			            </button>
 			          </div>
 			        </div>
+			        <div class="input-group input-group-sm">
+			        	<select>
+			        		
+			        	</select>
+			        </div>
 			      </form>
               </div>
               <!-- /.card-header -->
@@ -90,7 +95,7 @@
                         	<input type="hidden" value="<%=item.getId()%>" id="id-delete">
                   			<i class="fas fa-trash-alt" style="width: 50%"></i>
                 		</btn>|
-                		<a class="">
+                		<a class="modalDetail" href="reader?action=detail_reader&id=<%=item.getId()%>">
                   			<i class="fas fa-info-circle"></i>
                 		</a>
                 		
@@ -105,6 +110,27 @@
               <!-- /.card-body -->
             </div>
     </div>
+    
+    <div class="modal" tabindex="-1" role="dialog" id="modalReader">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p>Modal body text goes here.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    
     <%@include file="/decorator/admin/footer.jsp" %>
     <script type="text/javascript">
     	$(".btn-delete").click(function (e) { 
@@ -128,7 +154,7 @@
                   
 				}                
           });
-    	}); 	
+    	});  
     </script>
 </body>
 </html>

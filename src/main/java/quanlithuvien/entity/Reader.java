@@ -1,6 +1,6 @@
 package quanlithuvien.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
@@ -49,7 +48,7 @@ public class Reader {
 	@Column(name = "modified_by")
 	private String modifiedBy;
 
-	@OneToMany(mappedBy = "reader",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "reader",fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
 	private Set<BookReader> bookReaders;
 	
 	public Reader() {
