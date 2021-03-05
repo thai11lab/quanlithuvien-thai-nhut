@@ -61,6 +61,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                  	<th>STT</th>
                     <th>Mã tài liệu</th>
                     <th>Tên tài liệu</th>
                     <th>Nhà xuất bản</th>
@@ -73,9 +74,11 @@
                   <tbody>
                   <% 
                   	List<Book> books = (List<Book>) request.getAttribute("listBook");
+                  	int stt = 1;
                   	for(Book item : books){                 	
                   %>
                   <tr>
+                  	<td><%=stt++%></td>
                     <td><%=item.getCode() %></td>
                     <td>
                     	<%=item.getName() %>
@@ -131,7 +134,9 @@
                     
 				}                
           });
-    	}); 	
+    	}); 
+    	
+    	
     </script>
 </body>
 

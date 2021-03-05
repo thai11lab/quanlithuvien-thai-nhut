@@ -181,4 +181,44 @@ public class BookRepository {
 		return listBookIsChecked;
 	}
 
+	public List<Book> findByName(Book book) {
+		List<Book> listBook = new ArrayList<Book>();
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery("SELECT b FROM Book b WHERE b.name =:name", Book.class);
+			query.setParameter("name", book.getName());
+			query.setParameter("code", book.getCode());
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return listBook;
+	}
+	
+	public List<Book> findByCode(Book book) {
+		List<Book> listBook = new ArrayList<Book>();
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery("SELECT b FROM Book b WHERE b.code =:code", Book.class);
+			query.setParameter("code", book.getCode());
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return listBook;
+	}
 }

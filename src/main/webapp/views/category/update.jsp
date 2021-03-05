@@ -29,26 +29,28 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/category?action=UPDATE_SUCCESS">
+              <form method="post" action="/category?action=UPDATE_SUCCESS" id="form-add">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="code">Mã sách</label>
-                    <input type="text" class="form-control" id="code" placeholder="Mã sách" name="code" value="<%=categoryUpdate.getCode()%>">
+                    <label for="code">Mã</label>
+                    <input type="text" class="form-control" id="code" placeholder="Mã" name="code">
+                    <span id="validate-code" style="color: red;font-size: 14px;"></span>
                   </div>
                   <div class="form-group">
-                    <label for="name">Tên sách</label>
-                    <input type="text" class="form-control" id="name" placeholder="name" name="name" value="<%=categoryUpdate.getName()%>">
-                  </div>
-                
-                  
-              
+                    <label for="name">Tên</label>
+                    <input type="text" class="form-control" id="name" placeholder="Tên" name="name">
+                    <span id="validate-name" style="color: red;font-size: 14px;"></span>
+                  </div>                 
+                  <input type="hidden" class="form-check-input" name="id" value="">
                 </div>
                 <!-- /.card-body -->
+                <!-- /.card-body -->
 					<input type="hidden" class="form-check-input" name="id" value="<%=categoryUpdate.getId()%>">
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                
               </form>
+              <div class="card-footer">
+                  <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                </div>
             </div>
 	      
     </div>

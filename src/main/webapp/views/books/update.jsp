@@ -30,23 +30,27 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/books?action=UPDATE_SUCCESS">
+              <form method="post" action="/books?action=UPDATE_SUCCESS" id="form-add">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="code">Mã sách</label>
                     <input type="text" class="form-control" id="code" placeholder="Mã sách" name="code" value="<%=bookUpdate.getCode()%>">
+                    <span id="validate-code" style="color: red;font-size: 14px;"></span>
                   </div>
                   <div class="form-group">
                     <label for="name">Tên sách</label>
                     <input type="text" class="form-control" id="name" placeholder="name" name="name" value="<%=bookUpdate.getName()%>">
+                    <span id="validate-name" style="color: red;font-size: 14px;"></span>
                   </div>
                   <div class="form-group">
                     <label for="number">Số lượng</label>
                     <input type="number" class="form-control" id="totalBook" placeholder="name" name="totalBook" value="<%=bookUpdate.getTotalBook()%>">
+                    <span id="validate-number" style="color: red;font-size: 14px;"></span>
                   </div>
                   <div class="form-group">
                     <label for="name">Nhà xuất bản</label>
                     <input type="text" class="form-control" id="company" placeholder="company" name="company" value="<%=bookUpdate.getCompany()%>">
+                    <span id="validate-company" style="color: red;font-size: 14px;"></span>
                   </div>
                   <div class="form-group">
                   	<label>Thể loại</label>
@@ -77,10 +81,11 @@
                 </div>
                 <!-- /.card-body -->
 					<input type="hidden" class="form-check-input" name="id" value="<%=bookUpdate.getId()%>">
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                
               </form>
+              <div class="card-footer">
+                  <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                </div>
             </div>
 	      
     </div>

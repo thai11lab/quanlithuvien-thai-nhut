@@ -31,8 +31,6 @@ public class Reader {
 	@Column(name = "address")
 	private String address;
 	
-	
-
 	@Column(name = "age")
 	private int age;
 	

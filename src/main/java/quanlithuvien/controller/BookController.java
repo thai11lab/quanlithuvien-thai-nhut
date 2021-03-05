@@ -39,10 +39,10 @@ public class BookController extends HttpServlet {
 		List<Book> listBook = new ArrayList<Book>();
 		String action = request.getParameter("action");
 		List<Category> lisCategories = categoryService.findAll();
-
 		Book book = new Book();
 		listBook = bookService.findAll();
-
+		request.setAttribute("messageErrorCode","");
+		request.setAttribute("messageErrorName","");
 		switch (action) {
 		case "LIST":
 			request.setAttribute("listBook", listBook);
@@ -53,6 +53,7 @@ public class BookController extends HttpServlet {
 //			if (lisCategories == null) {
 //				response.sendRedirect("");
 //			}
+			
 			request.setAttribute("listCT", lisCategories);
 			request.getRequestDispatcher(request.getContextPath() + "/views/books/addBooks.jsp").forward(request,
 					response);
@@ -101,20 +102,35 @@ public class BookController extends HttpServlet {
 			int totalBook = Integer.parseInt(request.getParameter("totalBook").toString());
 			Long categoryID = Long.parseLong(request.getParameter("category").toString());
 			Category category = categoryService.findById(categoryID);
-
+			
 			Book book = new Book();
 			book.setName(name);
 			book.setCode(code);
 			book.setCompany(company);
 			book.setTotalBook(totalBook);
 			book.setCategory(category);
-			if (id != null && !(id.equals(""))) {
-				Long idUpdate = Long.parseLong(id);
-				bookService.update(book, idUpdate);
-			} else {
-				bookService.save(book);
-			}
-			response.sendRedirect("/books?action=LIST");
+			if (bookService.checkUseCode(book) || bookService.checkUseName(book)) {
+				if (bookService.checkUseCode(book)) {
+					request.setAttribute("messageErrorCode","Đã tồn tại mã sách");
+				}
+				if (bookService.checkUseName(book)) {
+					request.setAttribute("messageErrorName","Đã tồn tại tên sách");
+				}
+				if (id !=null && !id.equals("")) {
+					request.getRequestDispatcher("book?action=EDIT").forward(request, response);
+				}else {
+					request.getRequestDispatcher("book?action=ADD").forward(request, response);
+				}
+				return;
+			}else {
+				if (id != null && !(id.equals(""))) {
+					Long idUpdate = Long.parseLong(id);
+					bookService.update(book, idUpdate);
+				} else {
+					bookService.save(book);
+				}
+				response.sendRedirect("/books?action=LIST");
+			}		
 		}		
 	}
 

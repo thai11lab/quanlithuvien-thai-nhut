@@ -48,4 +48,26 @@ public class BookService {
 		// TODO Auto-generated method stub
 		return bookRepository.findByProductIsCheck(id);
 	}
+
+	public boolean checkUseName(Book book) {
+		// TODO Auto-generated method stub
+		List<Book> listBookDuplicate = bookRepository.findByName(book);
+		for (Book book2 : listBookDuplicate) {
+			if (book.getName().equals(book2.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkUseCode(Book book) {
+		// TODO Auto-generated method stub
+		List<Book> listBookDuplicate = bookRepository.findByCode(book);
+		for (Book book2 : listBookDuplicate) {
+			if (book.getCode().equals(book2.getCode())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -57,6 +57,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                  	<th>STT</th>
                     <th>Mã thể loại</th>
                     <th>Tên thể loại</th>
                                     
@@ -66,10 +67,12 @@
                   
                   <tbody>
                   <% 
+                  	int stt =1;
                   	List<Category> categories = (List<Category>) request.getAttribute("listCategories");
                   	for(Category item : categories){                 	
                   %>
                   <tr>
+                  	<td><%=stt++%></td>
                     <td><%=item.getCode() %></td>
                     <td>
                     	<%=item.getName() %>

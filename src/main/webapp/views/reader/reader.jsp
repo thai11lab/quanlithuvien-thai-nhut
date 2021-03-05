@@ -61,6 +61,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                  	<th>STT</th>
                     <th>Mã bạn đọc</th>
                     <th>Họ tên</th>
                     <th>Địa chỉ</th>   
@@ -71,10 +72,12 @@
                   
                   <tbody>
                   <% 
+                  	int stt=1;
                   	List<Reader> readers = (List<Reader>) request.getAttribute("lisReaders");
                   	for(Reader item : readers){                 	
                   %>
                   <tr>
+                  	<td><%=stt++%></td>
                     <td><%=item.getCode() %></td>
                     <td>
                     	<%=item.getName() %>
