@@ -149,6 +149,32 @@ public class ReaderRepository {
 		}
 		return listObjects;
 	}
+	public void deleteById(Long id1) {
+		// TODO Auto-generated method stub
+		String sql = "Select b from Reader b WHERE b.id = :reader_id";
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery(sql, Reader.class);
+			query.setParameter("reader_id", id1);
+			Reader reader = (Reader) query.getSingleResult();
+			session.delete(reader);
+
+//			session.delete();	
+//			query1.setParameter("ID", id);
+//			query1.executeUpdate();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
 	
 	
 }

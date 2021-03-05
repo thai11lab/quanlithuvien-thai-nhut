@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.bcel.internal.generic.LUSHR;
+
 import quanlithuvien.entity.Book;
 import quanlithuvien.entity.BookReader;
 import quanlithuvien.entity.Category;
@@ -73,19 +75,24 @@ public class ReaderController extends HttpServlet {
 		case "DELETE":
 			Long id1 = Long.parseLong(request.getParameter("id").toString());
 			readerService.deleteById(id1);
-			response.sendRedirect("/books?action=LIST");
+			response.sendRedirect("/reader?action=LIST");
 			break;
 		case "detail_reader":
 			Long idReader = Long.parseLong(request.getParameter("id").toString());
 			List<Object[]> listObject = readerService.findByReaderDetail(idReader);
-			for (Object[] objects : listObject) {
-				Reader readerObj = (Reader) objects[0];
-				BookReader bookReaderObj = (BookReader) objects[1];
-				Book bookObj = (Book) objects[2];
-				System.out.println(readerObj.getName()+"-"+bookReaderObj.getId()+"-"+bookObj.getName());
+			if (listObject.size()>0 && !listObject.isEmpty()) {
+				List<Book> listBookObject = new ArrayList<Book>();
+				for (Object[] objects : listObject) {
+					Book bookObj = (Book) objects[1];
+					listBookObject.add(bookObj);
+				}
+				request.setAttribute("listBookObject", listBookObject);
+				request.setAttribute("ReaderObject", listObject.get(0)[0]);
+				request.getRequestDispatcher("/views/reader/detal_reader.jsp").forward(request,response);
+			}else {
+				request.getRequestDispatcher("/views/reader/error.jsp").forward(request,response);
 			}
-			request.setAttribute("Object",listObject);
-			request.getRequestDispatcher("/views/reader/detal_reader.jsp").forward(request,response);
+			
 			break;
 		default:
 			break;

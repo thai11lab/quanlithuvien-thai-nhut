@@ -149,7 +149,7 @@
       		  closeOnCancel: false
       		}).then(function(isConfirm){
       			if (isConfirm.value) {
-      				window.location.href="/category?action=DELETE&id="+id;
+      				window.location.href="/reader?action=DELETE&id="+id;
                     swal("Good job!", "Xóa thành công!", "success");                    		
                   
 				}                

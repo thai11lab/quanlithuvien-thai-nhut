@@ -19,7 +19,7 @@ public class CategoryRepository {
 		List<Category> listCategory = new ArrayList<Category>();
 		try {
 			session = HibernateConfig.buildSessionFactory().openSession();
-
+			session.beginTransaction();
 			listCategory = session.createQuery("SELECT c FROM Category c", Category.class).getResultList();
 
 			session.getTransaction().commit();

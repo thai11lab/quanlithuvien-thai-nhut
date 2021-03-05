@@ -26,7 +26,7 @@ public class ReaderService {
 
 	public void deleteById(Long id1) {
 		// TODO Auto-generated method stub
-		
+		readerRepository.deleteById(id1);
 	}
 	public List<Reader> findBySearch(String key) {
 		// TODO Auto-generated method stub
