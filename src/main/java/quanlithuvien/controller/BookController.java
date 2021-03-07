@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import quanlithuvien.entity.Book;
 import quanlithuvien.entity.Category;
@@ -36,15 +37,23 @@ public class BookController extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");  
 		request.setCharacterEncoding("utf-8");
+		HttpSession httpSession = request.getSession();
+		String errorCode = httpSession.getAttribute("messageErrorCode")==null ? "":(String) httpSession.getAttribute("messageErrorCode");
+		String errorName = httpSession.getAttribute("messageErrorName")==null ? "":(String) httpSession.getAttribute("messageErrorName");
+		
+//		if (!errorCode.isEmpty()) {
+//			
+//		}
 		List<Book> listBook = new ArrayList<Book>();
 		String action = request.getParameter("action");
 		List<Category> lisCategories = categoryService.findAll();
 		Book book = new Book();
 		listBook = bookService.findAll();
-		request.setAttribute("messageErrorCode","");
-		request.setAttribute("messageErrorName","");
+	
 		switch (action) {
 		case "LIST":
+			httpSession.removeAttribute("messageErrorCode");
+			httpSession.removeAttribute("messageErrorName");
 			request.setAttribute("listBook", listBook);
 			request.getRequestDispatcher(request.getContextPath() + "/views/books/books.jsp").forward(request,
 					response);
@@ -53,7 +62,8 @@ public class BookController extends HttpServlet {
 //			if (lisCategories == null) {
 //				response.sendRedirect("");
 //			}
-			
+			request.setAttribute("existCode",errorCode);
+			request.setAttribute("existName", errorName);
 			request.setAttribute("listCT", lisCategories);
 			request.getRequestDispatcher(request.getContextPath() + "/views/books/addBooks.jsp").forward(request,
 					response);
@@ -87,7 +97,7 @@ public class BookController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");  
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action").toString();
-		
+		HttpSession httpSession = request.getSession();
 		
 		if (action.equals("SEARCH")) {		
 			String key = request.getParameter("key").toString();
@@ -109,19 +119,25 @@ public class BookController extends HttpServlet {
 			book.setCompany(company);
 			book.setTotalBook(totalBook);
 			book.setCategory(category);
-			if (bookService.checkUseCode(book) || bookService.checkUseName(book)) {
-				if (bookService.checkUseCode(book)) {
-					request.setAttribute("messageErrorCode","Đã tồn tại mã sách");
+			List<Book> bookDuplicateName = bookService.checkUseName(book);
+			List<Book> bookDuplicateCode = bookService.checkUseCode(book);
+			if (bookDuplicateName.size()>0 || bookDuplicateCode.size()>0) {
+				if (bookDuplicateName.size()>0) {
+					httpSession.setAttribute("messageErrorName","Đã tồn tại tên sách");
 				}
-				if (bookService.checkUseName(book)) {
-					request.setAttribute("messageErrorName","Đã tồn tại tên sách");
+				if (bookDuplicateCode.size()>0) {
+					httpSession.setAttribute("messageErrorCode","Đã tồn tại mã sách");
 				}
 				if (id !=null && !id.equals("")) {
-					request.getRequestDispatcher("book?action=EDIT").forward(request, response);
+					
+					
+					response.sendRedirect("books?action=EDIT");
 				}else {
-					request.getRequestDispatcher("book?action=ADD").forward(request, response);
+				
+				
+					response.sendRedirect("books?action=ADD");
+					
 				}
-				return;
 			}else {
 				if (id != null && !(id.equals(""))) {
 					Long idUpdate = Long.parseLong(id);

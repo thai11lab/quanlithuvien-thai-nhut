@@ -90,5 +90,6 @@
 	      
     </div>
     <%@include file="/decorator/admin/footer.jsp" %>
+    <script src="/template/validateForm/bookValidatetion.js"></script>
 </body>
 </html>

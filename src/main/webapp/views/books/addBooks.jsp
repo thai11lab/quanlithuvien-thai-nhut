@@ -37,12 +37,12 @@
             <div class="form-group">
               <label for="code">Mã sách</label>
               <input type="text" class="form-control" id="code" placeholder="Mã sách" name="code">
-              <span id="validate-code" style="color: red;font-size: 14px;"><%=request.getAttribute("messageErrorCode")%></span>
+              <span id="validate-code" style="color: red;font-size: 14px;"><%=request.getAttribute("existCode")%></span>
             </div>
             <div class="form-group">
               <label for="name">Tên sách</label>
               <input type="text" class="form-control" id="name" placeholder="name" name="name">
-              <span id="validate-name" style="color: red;font-size: 14px;"><%=request.getAttribute("messageErrorName")%></span>
+              <span id="validate-name" style="color: red;font-size: 14px;"><%=request.getAttribute("existName")%></span>
             </div>
             <div class="form-group">
               <label for="number">Số lượng</label>
@@ -94,6 +94,7 @@
 
     </div>
     <%@include file="/decorator/admin/footer.jsp" %>
+    <script src="/template/validateForm/bookValidatetion.js"></script>
 </body>
 
 </html>

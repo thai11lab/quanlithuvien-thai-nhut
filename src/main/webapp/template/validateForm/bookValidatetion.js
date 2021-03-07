@@ -5,7 +5,7 @@ $(".submit-btn").click(function (e) {
     var totalBook = $("#totalBook").val();
     var company = $("#company").val();
 
-    if (code !== "" && name !== "" && totalBook !== "" && company !== "") {
+    if (code !== "" && name !== "" && totalBook !== "" && company !== "" && parseInt(totalBook) > 1) {
         $("#form-add").submit();
     }
 
@@ -23,6 +23,8 @@ $(".submit-btn").click(function (e) {
 
     if (totalBook == "") {
         $("#validate-number").html("Vui không để trống");
+    } else if (parseInt(totalBook) < 1) {
+        $("#validate-number").html("Số lượng sách phải lớn hơn 0");
     } else {
         $("#validate-number").html("");
     }

@@ -16,7 +16,7 @@
   <script src="/template/plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script src="/template/sweetalert2/sweetalert2.min.js"></script>
-  <script src="/template/validateForm/bookValidatetion.js"></script>
+  
   </script>
 </body>
 </html>

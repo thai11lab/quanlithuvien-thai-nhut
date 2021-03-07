@@ -48,4 +48,16 @@ public class CategoryService {
 		// TODO Auto-generated method stub
 		categoryRepository.save(category);
 	}
+
+	public List<Category> findByExistCode(Category category) {
+		List<Category> listCategoryDuplicateCode = categoryRepository.findByExistCode(category);
+		
+		return listCategoryDuplicateCode;
+	}
+
+	public List<Category> findByExistName(Category category) {
+		List<Category> listCategoryDuplicateName = categoryRepository.findByExistName(category);
+		
+		return listCategoryDuplicateName;
+	}
 }

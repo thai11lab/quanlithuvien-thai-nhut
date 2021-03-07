@@ -188,7 +188,7 @@ public class BookRepository {
 			session.beginTransaction();
 			Query query = session.createQuery("SELECT b FROM Book b WHERE b.name =:name", Book.class);
 			query.setParameter("name", book.getName());
-			query.setParameter("code", book.getCode());
+			listBook = query.getResultList();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -209,6 +209,7 @@ public class BookRepository {
 			session.beginTransaction();
 			Query query = session.createQuery("SELECT b FROM Book b WHERE b.code =:code", Book.class);
 			query.setParameter("code", book.getCode());
+			listBook = query.getResultList();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception

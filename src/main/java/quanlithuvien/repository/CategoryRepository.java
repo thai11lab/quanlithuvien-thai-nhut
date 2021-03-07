@@ -162,4 +162,46 @@ public class CategoryRepository {
 			}
 		}
 	}
+
+	public List<Category> findByExistName(Category category) {
+		List<Category> listCategory = new ArrayList<Category>();
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery("SELECT c FROM Category c WHERE c.name =:name", Category.class);
+			query.setParameter("name", category.getName());
+			listCategory = query.getResultList();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return listCategory;
+	}
+
+	public List<Category> findByExistCode(Category category) {
+		List<Category> listCategory = new ArrayList<Category>();
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery("SELECT c FROM Category c WHERE c.code =:code", Category.class);
+			query.setParameter("code", category.getCode());
+			listCategory = query.getResultList();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return listCategory;
+	}
 }

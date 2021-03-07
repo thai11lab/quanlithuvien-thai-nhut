@@ -49,25 +49,17 @@ public class BookService {
 		return bookRepository.findByProductIsCheck(id);
 	}
 
-	public boolean checkUseName(Book book) {
+	public List<Book> checkUseName(Book book) {
 		// TODO Auto-generated method stub
-		List<Book> listBookDuplicate = bookRepository.findByName(book);
-		for (Book book2 : listBookDuplicate) {
-			if (book.getName().equals(book2.getName())) {
-				return true;
-			}
-		}
-		return false;
+		List<Book> listBookDuplicateName = bookRepository.findByName(book);
+		
+		return listBookDuplicateName;
 	}
 	
-	public boolean checkUseCode(Book book) {
+	public List<Book> checkUseCode(Book book) {
 		// TODO Auto-generated method stub
-		List<Book> listBookDuplicate = bookRepository.findByCode(book);
-		for (Book book2 : listBookDuplicate) {
-			if (book.getCode().equals(book2.getCode())) {
-				return true;
-			}
-		}
-		return false;
+		List<Book> listBookDuplicateCode = bookRepository.findByCode(book);
+		
+		return listBookDuplicateCode;
 	}
 }

@@ -54,5 +54,33 @@
 	      
     </div>
     <%@include file="/decorator/admin/footer.jsp" %>
+    <script type="text/javascript">
+    
+	    $(".submit-btn").click(function (e) {
+	        e.preventDefault();
+	        var code = $("#code").val();
+	        var name = $("#name").val();
+	        
+	
+	        if (code !== "" && name !== "") {
+	            $("#form-add").submit();
+	        }
+	
+	        if (code == "") {
+	
+	            $("#validate-code").html("Vui không để trống");
+	        } else {
+	            $("#validate-code").html("");
+	        }
+	        if (name == "") {
+	            $("#validate-name").html("Vui không để trống");
+	        } else {
+	            $("#validate-name").html("");
+	        }
+	
+	       
+	
+	    });
+    </script>
 </body>
 </html>
