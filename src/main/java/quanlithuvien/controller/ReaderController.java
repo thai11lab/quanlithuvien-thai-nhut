@@ -110,7 +110,9 @@ public class ReaderController extends HttpServlet {
 			String key = request.getParameter("key").toString();
 			List<Reader> lisReaders = readerService.findBySearch(key);
 			request.setAttribute("lisReaders", lisReaders);
-			request.getRequestDispatcher(request.getContextPath()+"/views/books/books.jsp").forward(request, response);
+			request.setAttribute("view","/views/reader/reader.jsp");
+			request.getRequestDispatcher("/views/layout.jsp").forward(request,
+					response);
 		}else {
 			String id = request.getParameter("id").toString();
 			String name = request.getParameter("name").toString();

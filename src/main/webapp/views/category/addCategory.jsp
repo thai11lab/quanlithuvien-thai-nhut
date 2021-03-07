@@ -34,12 +34,12 @@
                   <div class="form-group">
                     <label for="code">Mã</label>
                     <input type="text" class="form-control" id="code" placeholder="Mã" name="code">
-                    <span id="validate-code" style="color: red;font-size: 14px;"></span>
+                    <span id="validate-code" style="color: red;font-size: 14px;"><%=request.getAttribute("existCode") %></span>
                   </div>
                   <div class="form-group">
                     <label for="name">Tên</label>
                     <input type="text" class="form-control" id="name" placeholder="Tên" name="name">
-                    <span id="validate-name" style="color: red;font-size: 14px;"></span>
+                    <span id="validate-name" style="color: red;font-size: 14px;"><%=request.getAttribute("existName")%></span>
                   </div>                 
                   <input type="hidden" class="form-check-input" name="id" value="">
                 </div>

@@ -39,7 +39,7 @@
 	              </a>
                 </h3>
                 
-                 <form class="form-inline ml-3" style="float: right;" id="form-search" action="/category?action=SEARCH" method="post">
+                 <form class="form-inline ml-3" style="float: right;" id="form-search" action="/reader?action=SEARCH" method="post">
 			        <div class="input-group input-group-sm">
 			        <input class="form-control form-control-navbar" type="hidden" placeholder="Search" aria-label="Search" name="action" value="LIST">
 			          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="key">

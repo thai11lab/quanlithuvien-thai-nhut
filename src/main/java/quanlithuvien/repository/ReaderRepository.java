@@ -175,6 +175,35 @@ public class ReaderRepository {
 			}
 		}
 	}
+	public List<Reader> findBySearch(String key) {
+		List<Reader> listReader = new ArrayList<Reader>();
+		String sql = "SELECT r FROM Reader r";
+		if (key != null && key != "") {
+			sql += " WHERE r.name LIKE :key1 OR r.code LIKE :key2 ";
+		}
+		try {
+			session = HibernateConfig.buildSessionFactory().openSession();
+			session.beginTransaction();
+
+			Query query = session.createQuery(sql, Reader.class);
+			if (key != null && key != "") {
+				query.setParameter("key1", "%" + key + "%");
+				query.setParameter("key2", "%" + key + "%");
+			}
+
+			listReader = query.getResultList();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Rollback");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return listReader;
+	}
 	
 	
 }

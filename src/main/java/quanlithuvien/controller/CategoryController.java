@@ -33,17 +33,23 @@ public class CategoryController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		List<Category> listCategories = new ArrayList<Category>();
 		String action = request.getParameter("action");
-
+		HttpSession httpSession = request.getSession();
+		String errorCode = httpSession.getAttribute("messageErrorCode")==null ? "":(String) httpSession.getAttribute("messageErrorCode");
+		String errorName = httpSession.getAttribute("messageErrorName")==null ? "":(String) httpSession.getAttribute("messageErrorName");
 		Category category = new Category();
 		listCategories = categoryService.findAll();
 
 		switch (action) {
 		case "LIST":
+			httpSession.removeAttribute("messageErrorCode");
+			httpSession.removeAttribute("messageErrorName");
 			request.setAttribute("listCategories", listCategories);
 			request.setAttribute("view", "/views/category/category.jsp");
 			request.getRequestDispatcher(request.getContextPath() + "/views/layout.jsp").forward(request, response);
 			break;
 		case "ADD":
+			request.setAttribute("existCode",errorCode);
+			request.setAttribute("existName", errorName);
 			request.setAttribute("view", "/views/category/addCategory.jsp");
 			request.getRequestDispatcher(request.getContextPath() + "/views/layout.jsp").forward(request, response);
 			break;
@@ -90,9 +96,9 @@ public class CategoryController extends HttpServlet {
 			List<Category> categoriesExistName = categoryService.findByExistName(category);
 			if (categoriesExistCode.size() > 0 || categoriesExistName.size() > 0) {
 				if (categoriesExistCode.size() > 0) {
-					httpSession.setAttribute("messageErrorName", "Đã tồn tại mã thể loại");
+					httpSession.setAttribute("messageErrorCode", "Đã tồn tại mã thể loại");
 				} else if (categoriesExistName.size() > 0) {
-					httpSession.setAttribute("messageErrorCode", "Đã tồn tại tên thể loại");
+					httpSession.setAttribute("messageErrorName", "Đã tồn tại tên thể loại");
 				}
 				if (id != null && !id.equals("")) {
 					response.sendRedirect("category?action=EDIT");

@@ -30,7 +30,7 @@ public class ReaderService {
 	}
 	public List<Reader> findBySearch(String key) {
 		// TODO Auto-generated method stub
-		return null;
+		return readerRepository.findBySearch(key);
 	}
 	public void save(Reader reader, List<Long> productIdL) {
 		readerRepository.save(reader,productIdL);
