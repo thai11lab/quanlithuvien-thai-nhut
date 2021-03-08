@@ -15,7 +15,7 @@
 	        <div class="container-fluid">
 	          <div class="row mb-2">
 	            <div class="col-sm-6">
-	              <h1 class="m-0 text-dark">Thể loại</h1>
+	              <h1 class="m-0 text-dark">Danh sách bạn đọc</h1>
 	              
 	              <!-- SEARCH FORM -->
 			     
@@ -34,7 +34,7 @@
                 <h3 class="card-title">
                 	<a href="/reader?action=ADD" class="btn btn-block btn-success " style="width: 200px">
 	              	<i class="fas fa-plus-square"></i>	
-	              	Thêm mới thể loại
+	              	Thêm bạn đọc và sách mượn
 	              	
 	              </a>
                 </h3>
@@ -49,11 +49,7 @@
 			            </button>
 			          </div>
 			        </div>
-			        <div class="input-group input-group-sm">
-			        	<select>
-			        		
-			        	</select>
-			        </div>
+			        
 			      </form>
               </div>
               <!-- /.card-header -->
@@ -94,8 +90,8 @@
                   			<i class="fas fa-pen"></i>
                     </a>|           
                             	<!-- href="/books?action=DELETE&id=<%=item.getId()%>" -->
-                    	<btn  id="btn-delete" class="btn-delete">
-                        	<input type="hidden" value="<%=item.getId()%>" id="id-delete">
+                    	<btn  id="btn-delete" class="btn-delete" onclick="deleleByID(<%=item.getId()%>)">
+                        	<input type="hidden" value="<%=item.getId()%>" id="id-delete" >
                   			<i class="fas fa-trash-alt" style="width: 50%"></i>
                 		</btn>|
                 		<a class="modalDetail" href="reader?action=detail_reader&id=<%=item.getId()%>">
@@ -136,28 +132,27 @@
     
     <%@include file="/decorator/admin/footer.jsp" %>
     <script type="text/javascript">
-    	$(".btn-delete").click(function (e) { 
-	        e.preventDefault();
-	        debugger;
-	        var id = $("#id-delete").val();
-	        swal({
-      		  title: "Bạn có chắc muốn xóa?",
-      		  text: "",
-      		  type: "warning",
-      		  showCancelButton: true,
-      		  confirmButtonClass: "btn-danger",
-      		  confirmButtonText: "Yes",
-      		  cancelButtonText: "No",
-      		  closeOnConfirm: false,
-      		  closeOnCancel: false
-      		}).then(function(isConfirm){
-      			if (isConfirm.value) {
-      				window.location.href="/reader?action=DELETE&id="+id;
-                    swal("Good job!", "Xóa thành công!", "success");                    		
-                  
-				}                
-          });
-    	});  
+    	
+    	
+    	function deleleByID(id) {
+			swal({
+				title: "Bạn có chắc muốn xóa?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-danger",
+				confirmButtonText: "Yes",
+				cancelButtonText: "No",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}).then(function (isConfirm) {
+				if (isConfirm.value) {
+					window.location.href = "/reader?action=DELETE&id="+id;
+					swal("Good job!", "Xóa thành công!", "success");
+
+				}
+			});
+		}
     </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form method="post" action="/books?action=ADD_SUCCESS" id="form-add">
+        <form method="post" action="/books?action=ADD_SUCCESS" id="form-add" enctype="multipart/form-data">
           <div class="card-body">
             <div class="form-group">
               <label for="code">Mã sách</label>
@@ -68,7 +68,7 @@
               <label for="exampleInputFile">File input</label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
                   <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                 </div>
                 <div class="input-group-append">
@@ -76,10 +76,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
+            
             <input type="hidden" class="form-check-input" name="id" value="">
           </div>
           <!-- /.card-body -->

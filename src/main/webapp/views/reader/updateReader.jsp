@@ -58,13 +58,13 @@
                     <br></br>
                     <div style="padding-right: 30px">
 	                    
-	                    <%
-	                    	List<Book> books =(List<Book>) request.getAttribute("listBook");
-	                    	List<Book> listBookChecked = (List<Book>) request.getAttribute("listBookChecked");
-                    		for(Book book: books){                   		
-                    	%>
-							<%=book.getName() %><input type="checkbox" class="form-check-input" id="name"  name="product_id" value="<%=book.getId() %>" <%=books.containsAll(listBookChecked)?"checked":"" %> >
-						<%} %>
+	                    <c:forEach var="itemBook" items="${listBook}">
+	                    	<div style="display: flex;padding-left: 10px">
+	                    		<p>${itemBook.name}</p> 
+	                    		<input type="checkbox" class="form-check-input" id="name"  name="product_id" value="${itemBook.id}" >
+	                    	</div>
+	                    	               	
+	                    </c:forEach>
                     </div>
                     <span id="validate-name"></span>
                   </div>          

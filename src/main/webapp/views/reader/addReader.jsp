@@ -57,8 +57,12 @@
                     <label for="name">Sách mượn</label>
                     <br></br>
                     <div style="padding-right: 30px">
-	                    <c:forEach var="itemBook" items="${listBook}">                 	
-	                    	${itemBook.name} <input type="checkbox" class="form-check-input" id="name"  name="product_id" value="${itemBook.id}" >
+	                    <c:forEach var="itemBook" items="${listBook}">
+	                    	<div style="display: flex;padding-left: 10px">
+	                    		<p>${itemBook.name}</p> 
+	                    		<input type="checkbox" class="form-check-input" id="name"  name="product_id" value="${itemBook.id}" >
+	                    	</div>
+	                    	               	
 	                    </c:forEach>
                     </div>
                     <span id="validate-name"></span>

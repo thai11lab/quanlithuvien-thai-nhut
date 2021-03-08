@@ -1,15 +1,18 @@
 package quanlithuvien.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import quanlithuvien.entity.Book;
 import quanlithuvien.entity.Category;
@@ -17,6 +20,9 @@ import quanlithuvien.service.BookService;
 import quanlithuvien.service.CategoryService;
 
 @WebServlet(urlPatterns = { "/books","/search" })
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 50, // 50MB
+maxRequestSize = 1024 * 1024 * 50) 
 public class BookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -69,6 +75,8 @@ public class BookController extends HttpServlet {
 					response);
 			break;
 		case "EDIT":
+			request.setAttribute("existCode",errorCode);
+			request.setAttribute("existName", errorName);
 //			Long id = Long.parseLong(request.getParameter("id").toString()); 
 			Long id = Long.parseLong(request.getParameter("id").toString());
 			book = bookService.findById(id);
@@ -111,6 +119,19 @@ public class BookController extends HttpServlet {
 			String company = request.getParameter("company").toString();
 			int totalBook = Integer.parseInt(request.getParameter("totalBook").toString());
 			Long categoryID = Long.parseLong(request.getParameter("category").toString());
+			System.out.println(request.getParts());
+			Part part = request.getPart("file");
+			String fileName;
+			
+			if (!id.equals("")) {
+				Long idU=Long.parseLong(id);
+				fileName = uploadFile(part,idU);
+			}else {
+				fileName = uploadFile(part,null);
+			}
+			
+			
+		
 			Category category = categoryService.findById(categoryID);
 			
 			Book book = new Book();
@@ -119,9 +140,11 @@ public class BookController extends HttpServlet {
 			book.setCompany(company);
 			book.setTotalBook(totalBook);
 			book.setCategory(category);
+			book.setImg_url(fileName);
 			List<Book> bookDuplicateName = bookService.checkUseName(book);
 			List<Book> bookDuplicateCode = bookService.checkUseCode(book);
-			if (bookDuplicateName.size()>0 || bookDuplicateCode.size()>0) {
+			
+			if ((bookDuplicateName.size()>0 || bookDuplicateCode.size()>0)) {
 				if (bookDuplicateName.size()>0) {
 					httpSession.setAttribute("messageErrorName","Đã tồn tại tên sách");
 				}
@@ -130,8 +153,10 @@ public class BookController extends HttpServlet {
 				}
 				if (id !=null && !id.equals("")) {
 					
+					if (bookDuplicateCode.size() <= 1 && bookDuplicateName.size() <= 1) {
+						response.sendRedirect("books?action=EDIT&id="+id);
+					}
 					
-					response.sendRedirect("books?action=EDIT");
 				}else {
 				
 				
@@ -150,4 +175,26 @@ public class BookController extends HttpServlet {
 		}		
 	}
 
+	public String uploadFile(Part part,Long id) {
+		String fileName = part.getSubmittedFileName().toString();
+		
+		File folderUpload = new File(getServletContext().getRealPath("/img"));
+		if (!folderUpload.exists()) {
+			folderUpload.mkdirs();
+		}
+		try {
+			if (fileName == null && id != null) {
+				Book book = bookService.findById(id);
+				fileName = book.getImg_url();
+			}else {
+				String mainUrl = folderUpload.toString()+"\\"+fileName;
+				part.write(mainUrl);
+			}		
+			return fileName;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

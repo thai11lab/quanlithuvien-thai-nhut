@@ -34,7 +34,8 @@ Reader reader =(Reader) request.getAttribute("ReaderObject");
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Họ tên : <%=reader.getName()%></h3>
-
+          <br>
+			<h3 class="card-title">Địa chỉ : <%=reader.getAddress()%></h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
@@ -51,24 +52,8 @@ Reader reader =(Reader) request.getAttribute("ReaderObject");
                 <div class="col-12 col-sm-4">
                   <div class="info-box bg-light">
                     <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Số sách mượnt</span>
-                      <span class="info-box-number text-center text-muted mb-0">2300</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Total amount spent</span>
-                      <span class="info-box-number text-center text-muted mb-0">2000</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                      <span class="info-box-number text-center text-muted mb-0">20</span>
+                      <span class="info-box-text text-center text-muted">Số sách mượn</span>
+                      <span class="info-box-number text-center text-muted mb-0"><%=listObject.size()%></span>
                     </div>
                   </div>
                 </div>

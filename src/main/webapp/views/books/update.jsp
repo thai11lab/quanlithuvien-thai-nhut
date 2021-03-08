@@ -30,17 +30,17 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/books?action=UPDATE_SUCCESS" id="form-add">
+              <form method="post" action="/books?action=UPDATE_SUCCESS" id="form-add" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="code">Mã sách</label>
                     <input type="text" class="form-control" id="code" placeholder="Mã sách" name="code" value="<%=bookUpdate.getCode()%>">
-                    <span id="validate-code" style="color: red;font-size: 14px;"></span>
+                    <span id="validate-code" style="color: red;font-size: 14px;"><%=request.getAttribute("existCode")%></span>
                   </div>
                   <div class="form-group">
                     <label for="name">Tên sách</label>
                     <input type="text" class="form-control" id="name" placeholder="name" name="name" value="<%=bookUpdate.getName()%>">
-                    <span id="validate-name" style="color: red;font-size: 14px;"></span>
+                    <span id="validate-name" style="color: red;font-size: 14px;"><%=request.getAttribute("existName")%></span>
                   </div>
                   <div class="form-group">
                     <label for="number">Số lượng</label>
@@ -63,17 +63,17 @@
   					</select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
-                  </div>
+              <label for="exampleInputFile">File input</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">Upload</span>
+                </div>
+              </div>
+            </div>
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>

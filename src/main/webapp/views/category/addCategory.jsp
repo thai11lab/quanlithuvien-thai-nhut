@@ -12,7 +12,7 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-		<%@include file="/decorator/admin/navbar.jsp" %>
+		
 	    <!-- Main Sidebar Container -->
 	    <%@include file="/decorator/admin/slidebar.jsp" %>
 	    <div class="content-wrapper">

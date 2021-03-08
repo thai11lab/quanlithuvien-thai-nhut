@@ -52,7 +52,8 @@
 	            </li>
 	            <li class="nav-item">
 	              <a href="/books?action=LIST" class="nav-link">
-	                <i class="nav-icon fas fa-th"></i>
+	                
+	                <i class="nav-icon fas fa-book"></i>
 	                <p>
 	                  Quản lí sách
 	                </p>
@@ -68,7 +69,7 @@
 	            </li>
 	            <li class="nav-item">
 	              <a href="/reader?action=LIST" class="nav-link">
-	                <i class="nav-icon fas fa-th"></i>
+	                <i class="nav-icon far fa-user"></i>
 	                <p>
 	                  Quản lí bạn đọc
 	                </p>
